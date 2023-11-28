@@ -235,16 +235,13 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                                 0.00, -1.00),
                                             child:
                                                 FutureBuilder<ApiCallResponse>(
-                                              future: _model.h5p(
-                                                requestFn: () =>
-                                                    CourseSingleCall.call(
-                                                  token:
-                                                      '1|3b39b37cb9a70f5c018557f427416b67',
-                                                  courseId: widget.courseId,
-                                                  itemId: getJsonField(
-                                                    materialListItem,
-                                                    r'''$.post_id''',
-                                                  ),
+                                              future: CourseSingleCall.call(
+                                                token:
+                                                    '1|3b39b37cb9a70f5c018557f427416b67',
+                                                courseId: widget.courseId,
+                                                itemId: getJsonField(
+                                                  materialListItem,
+                                                  r'''$.post_id''',
                                                 ),
                                               ),
                                               builder: (context, snapshot) {
@@ -270,11 +267,11 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                                 final webViewCourseSingleResponse =
                                                     snapshot.data!;
                                                 return FlutterFlowWebView(
-                                                  content: '${getJsonField(
+                                                  content:
+                                                      '${CourseSingleCall.param(
                                                     webViewCourseSingleResponse
                                                         .jsonBody,
-                                                    r'''$.param''',
-                                                  ).toString()}?token=179ac5aab1d709c477052aadb5fa69a070cd02393e0c7ed51dfaffd0ee76cd56b66136aa15dfee97ccd695dda87abef9219d8ca75ed6fbb1bba7aeb9fe2741af&app=yes',
+                                                  ).toString()}&token=179ac5aab1d709c477052aadb5fa69a070cd02393e0c7ed51dfaffd0ee76cd56b66136aa15dfee97ccd695dda87abef9219d8ca75ed6fbb1bba7aeb9fe2741af',
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
