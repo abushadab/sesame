@@ -1,7 +1,4 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/request_manager.dart';
-
 import 'coursesingle_widget.dart' show CoursesingleWidget;
 import 'package:flutter/material.dart';
 
@@ -18,23 +15,6 @@ class CoursesingleModel extends FlutterFlowModel<CoursesingleWidget> {
       ? pageViewController!.page!.round()
       : 0;
 
-  /// Query cache managers for this widget.
-
-  final _h5pManager = FutureRequestManager<ApiCallResponse>();
-  Future<ApiCallResponse> h5p({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<ApiCallResponse> Function() requestFn,
-  }) =>
-      _h5pManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearH5pCache() => _h5pManager.clear();
-  void clearH5pCacheKey(String? uniqueKey) =>
-      _h5pManager.clearRequest(uniqueKey);
-
   /// Initialization and disposal methods.
 
   @override
@@ -43,10 +23,6 @@ class CoursesingleModel extends FlutterFlowModel<CoursesingleWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-
-    /// Dispose query cache managers for this widget.
-
-    clearH5pCache();
   }
 
   /// Action blocks are added here.
