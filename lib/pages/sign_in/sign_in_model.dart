@@ -42,7 +42,7 @@ class SignInModel extends FlutterFlowModel<SignInWidget> {
   ApiCallResponse? apiResult1s9;
   // Model for GradientButton component.
   late GradientButtonModel gradientButtonModel2;
-  // Stores action output result for [Backend Call - API (verifyotp)] action in GradientButton widget.
+  // Stores action output result for [Backend Call - API (Oneclick Login and Signup)] action in GradientButton widget.
   ApiCallResponse? verifyOtp;
 
   /// Initialization and disposal methods.

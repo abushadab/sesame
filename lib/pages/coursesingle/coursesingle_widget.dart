@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
@@ -160,48 +161,131 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                   return Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Align(
-                                        alignment:
-                                            AlignmentDirectional(0.00, -1.00),
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          height: 500.0,
-                                          child: custom_widgets
-                                              .CustomYoutubePlayer(
-                                            width: double.infinity,
-                                            height: 500.0,
-                                            initialVideoId: 'nr1Sdr-8Dtc',
+                                      if ((String type) {
+                                        return type == "video";
+                                      }(getJsonField(
+                                        materialListItem,
+                                        r'''$.type''',
+                                      ).toString()))
+                                        Expanded(
+                                          child: Align(
+                                            alignment: const AlignmentDirectional(
+                                                0.00, -1.00),
+                                            child:
+                                                FutureBuilder<ApiCallResponse>(
+                                              future: CourseSingleCall.call(
+                                                token:
+                                                    '1|3b39b37cb9a70f5c018557f427416b67',
+                                                courseId: widget.courseId,
+                                                itemId: getJsonField(
+                                                  materialListItem,
+                                                  r'''$.post_id''',
+                                                ),
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                final customYoutubePlayerCourseSingleResponse =
+                                                    snapshot.data!;
+                                                return SizedBox(
+                                                  width: double.infinity,
+                                                  height: 200.0,
+                                                  child: custom_widgets
+                                                      .CustomYoutubePlayer(
+                                                    width: double.infinity,
+                                                    height: 200.0,
+                                                    initialVideoId:
+                                                        CourseSingleCall
+                                                            .videoid(
+                                                      customYoutubePlayerCourseSingleResponse
+                                                          .jsonBody,
+                                                    ).toString(),
+                                                  ),
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Text(
-                                        valueOrDefault<String>(
-                                          materialListItem.toString(),
-                                          'Error',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
+                                      if ((String type) {
+                                        return type == "text";
+                                      }(getJsonField(
+                                        materialListItem,
+                                        r'''$.type''',
+                                      ).toString()))
+                                        Expanded(
+                                          child: Align(
+                                            alignment: const AlignmentDirectional(
+                                                0.00, -1.00),
+                                            child:
+                                                FutureBuilder<ApiCallResponse>(
+                                              future: _model.h5p(
+                                                requestFn: () =>
+                                                    CourseSingleCall.call(
+                                                  token:
+                                                      '1|3b39b37cb9a70f5c018557f427416b67',
+                                                  courseId: widget.courseId,
+                                                  itemId: getJsonField(
+                                                    materialListItem,
+                                                    r'''$.post_id''',
+                                                  ),
+                                                ),
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                final webViewCourseSingleResponse =
+                                                    snapshot.data!;
+                                                return FlutterFlowWebView(
+                                                  content: '${getJsonField(
+                                                    webViewCourseSingleResponse
+                                                        .jsonBody,
+                                                    r'''$.param''',
+                                                  ).toString()}?token=179ac5aab1d709c477052aadb5fa69a070cd02393e0c7ed51dfaffd0ee76cd56b66136aa15dfee97ccd695dda87abef9219d8ca75ed6fbb1bba7aeb9fe2741af&app=yes',
+                                                  height:
+                                                      MediaQuery.sizeOf(context)
+                                                              .height *
+                                                          1.0,
+                                                  verticalScroll: false,
+                                                  horizontalScroll: false,
+                                                );
+                                              },
                                             ),
-                                      ),
-                                      Text(
-                                        valueOrDefault<String>(
-                                          materialListIndex.toString(),
-                                          'Error',
+                                          ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                            ),
-                                      ),
                                     ],
                                   );
                                 },
@@ -218,43 +302,35 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'Next',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: const Color(0xFFFFC54D),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: Colors.white,
-                                    ),
-                                elevation: 0.0,
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                          if (_model.pageViewCurrentIndex != 0)
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 10.0, 0.0),
+                              child: FlutterFlowIconButton(
+                                borderRadius: 8.0,
+                                borderWidth: 0.0,
+                                buttonSize: 40.0,
+                                fillColor: const Color(0xFF9B0FFF),
+                                icon: Icon(
+                                  Icons.arrow_back_ios_new_rounded,
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  size: 24.0,
                                 ),
-                                borderRadius: BorderRadius.circular(8.0),
+                                onPressed: () async {
+                                  await _model.pageViewController?.previousPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.ease,
+                                  );
+                                  setState(() {});
+                                },
                               ),
                             ),
-                          ),
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: !FFAppState().videoComplete
                                   ? null
-                                  : () async {
-                                      await _model.pageViewController?.nextPage(
-                                        duration: const Duration(milliseconds: 300),
-                                        curve: Curves.ease,
-                                      );
+                                  : () {
+                                      print('Button pressed ...');
                                     },
                               text: 'Complete',
                               options: FFButtonOptions(
@@ -263,7 +339,7 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                     24.0, 0.0, 24.0, 0.0),
                                 iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: const Color(0xFFFFC54D),
+                                color: FlutterFlowTheme.of(context).success,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
@@ -284,7 +360,62 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                               ),
                             ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 0.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 8.0,
+                              borderWidth: 0.0,
+                              buttonSize: 40.0,
+                              fillColor: const Color(0xFF9B0FFF),
+                              icon: Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                color: FlutterFlowTheme.of(context).alternate,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                if (_model.pageViewCurrentIndex >=
+                                    valueOrDefault<int>(
+                                      MsLmsGroup.sectionsCall
+                                          .materials(
+                                            coursesingleSectionsResponse
+                                                .jsonBody,
+                                          )
+                                          .where((e) =>
+                                              widget.sectionId ==
+                                              getJsonField(
+                                                e,
+                                                r'''$.section_id''',
+                                              ))
+                                          .toList()
+                                          .length,
+                                      0,
+                                    )) {
+                                  context.pushNamed(
+                                    'coursesingle',
+                                    queryParameters: {
+                                      'sectionId': serializeParam(
+                                        widget.sectionId,
+                                        ParamType.int,
+                                      ),
+                                      'courseId': serializeParam(
+                                        widget.courseId,
+                                        ParamType.int,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                } else {
+                                  await _model.pageViewController?.nextPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.ease,
+                                  );
+                                  setState(() {});
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

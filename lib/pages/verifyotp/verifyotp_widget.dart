@@ -159,7 +159,8 @@ class _VerifyotpWidgetState extends State<VerifyotpWidget> {
                           !_model.formKey.currentState!.validate()) {
                         return;
                       }
-                      _model.apiResult1s9 = await VerifyotpCall.call(
+                      _model.apiResult1s9 =
+                          await OneclickLoginAndSignupCall.call(
                         mobileNo: FFAppState().mobileNo,
                         otp: _model.textController.text,
                       );
@@ -178,10 +179,12 @@ class _VerifyotpWidgetState extends State<VerifyotpWidget> {
                           ),
                         );
                         setState(() {
-                          FFAppState().ztoken = VerifyotpCall.dataztoken(
+                          FFAppState().ztoken =
+                              OneclickLoginAndSignupCall.dataztoken(
                             (_model.apiResult1s9?.jsonBody ?? ''),
                           ).toString();
-                          FFAppState().digitkey = VerifyotpCall.dataaccesstoken(
+                          FFAppState().digitkey =
+                              OneclickLoginAndSignupCall.dataaccesstoken(
                             (_model.apiResult1s9?.jsonBody ?? ''),
                           ).toString();
                         });
@@ -191,7 +194,7 @@ class _VerifyotpWidgetState extends State<VerifyotpWidget> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              VerifyotpCall.datamsg(
+                              OneclickLoginAndSignupCall.datamsg(
                                 (_model.apiResult1s9?.jsonBody ?? ''),
                               ).toString(),
                               style: TextStyle(

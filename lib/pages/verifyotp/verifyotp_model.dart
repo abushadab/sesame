@@ -12,7 +12,7 @@ class VerifyotpModel extends FlutterFlowModel<VerifyotpWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Stores action output result for [Backend Call - API (verifyotp)] action in Container widget.
+  // Stores action output result for [Backend Call - API (Oneclick Login and Signup)] action in Container widget.
   ApiCallResponse? apiResult1s9;
 
   /// Initialization and disposal methods.
