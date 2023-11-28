@@ -274,7 +274,8 @@ class _SignInWidgetState extends State<SignInWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              _model.verifyOtp = await VerifyotpCall.call(
+                              _model.verifyOtp =
+                                  await OneclickLoginAndSignupCall.call(
                                 mobileNo: _model.phoneNumberController.text,
                                 otp: _model.otpController.text,
                               );
@@ -295,17 +296,19 @@ class _SignInWidgetState extends State<SignInWidget> {
                                 );
                                 authManager.updateAuthUserData(
                                   authenticationToken:
-                                      VerifyotpCall.dataaccesstoken(
+                                      OneclickLoginAndSignupCall
+                                          .dataaccesstoken(
                                     (_model.verifyOtp?.jsonBody ?? ''),
                                   ).toString(),
                                 );
                                 setState(() {
                                   FFAppState().ztoken =
-                                      VerifyotpCall.dataztoken(
+                                      OneclickLoginAndSignupCall.dataztoken(
                                     (_model.verifyOtp?.jsonBody ?? ''),
                                   ).toString();
                                   FFAppState().digitkey =
-                                      VerifyotpCall.dataaccesstoken(
+                                      OneclickLoginAndSignupCall
+                                          .dataaccesstoken(
                                     (_model.verifyOtp?.jsonBody ?? ''),
                                   ).toString();
                                 });
@@ -315,7 +318,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      VerifyotpCall.datamsg(
+                                      OneclickLoginAndSignupCall.datamsg(
                                         (_model.verifyOtp?.jsonBody ?? ''),
                                       ).toString(),
                                       style: TextStyle(

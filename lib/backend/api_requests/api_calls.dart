@@ -52,41 +52,6 @@ class SectionsCall {
 
 /// End MS LMS Group Code
 
-class LoginCall {
-  static Future<ApiCallResponse> call({
-    String? login = '',
-    String? password = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "login": "$login",
-  "password": "$password"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'login',
-      apiUrl: 'https://hostkoro.com/sarath/wp-json/ms_lms/v2/login',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-    );
-  }
-
-  static dynamic message(dynamic response) => getJsonField(
-        response,
-        r'''$.message''',
-      );
-  static dynamic token(dynamic response) => getJsonField(
-        response,
-        r'''$.token''',
-      );
-}
-
 class AccountCall {
   static Future<ApiCallResponse> call({
     String? token = '',
@@ -196,14 +161,14 @@ class SendotpCall {
       );
 }
 
-class VerifyotpCall {
+class OneclickLoginAndSignupCall {
   static Future<ApiCallResponse> call({
     String? countrycode = '+880',
     String? mobileNo = '',
     String? otp = '',
   }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'verifyotp',
+      callName: 'Oneclick Login and Signup',
       apiUrl: 'https://hostkoro.com/sarath/wp-json/digits/v1/one_click',
       callType: ApiCallType.POST,
       headers: {},
@@ -292,6 +257,10 @@ class CourseSingleCall {
   static dynamic param(dynamic response) => getJsonField(
         response,
         r'''$.param''',
+      );
+  static dynamic videoid(dynamic response) => getJsonField(
+        response,
+        r'''$.video''',
       );
 }
 
