@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:flutter/services.dart';
+
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CustomYoutubePlayer extends StatefulWidget {
@@ -17,11 +19,13 @@ class CustomYoutubePlayer extends StatefulWidget {
     this.width,
     this.height,
     required this.initialVideoId,
+    required this.onEnd,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final String initialVideoId;
+  final Future<dynamic> Function() onEnd;
 
   @override
   _CustomYoutubePlayerState createState() => _CustomYoutubePlayerState();
@@ -57,6 +61,7 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
       FFAppState().update(() {
         FFAppState().videoComplete = true;
       });
+      widget.onEnd;
     } else {
       FFAppState().update(() {
         FFAppState().videoComplete = false;
@@ -83,6 +88,7 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
             FFAppState().update(() {
               FFAppState().videoComplete = true;
             });
+            widget.onEnd;
           },
         ),
       ],

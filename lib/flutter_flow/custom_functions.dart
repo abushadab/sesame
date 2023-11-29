@@ -19,3 +19,13 @@ double raingsStringtoDouble(String? rating) {
     return double.tryParse(rating) ?? 0.0;
   }
 }
+
+int returnFirstMetarialItemId(
+  List<dynamic> materiail,
+  int sectionId,
+) {
+  // from material json list return first item after filtering section id
+  final filteredList =
+      materiail.where((item) => item['section_id'] == sectionId).toList();
+  return filteredList.isNotEmpty ? filteredList.first['post_id'] : -1;
+}

@@ -15,6 +15,7 @@ class MsLmsGroup {
     'token': '[token]',
   };
   static SectionsCall sectionsCall = SectionsCall();
+  static CompleteALessonCall completeALessonCall = CompleteALessonCall();
 }
 
 class SectionsCall {
@@ -48,6 +49,30 @@ class SectionsCall {
         r'''$.materials''',
         true,
       );
+}
+
+class CompleteALessonCall {
+  Future<ApiCallResponse> call({
+    int? courseId,
+    int? itemId,
+    String? token = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Complete A Lesson',
+      apiUrl:
+          '${MsLmsGroup.baseUrl}course/lesson/complete?course_id=$courseId&item_id=$itemId',
+      callType: ApiCallType.POST,
+      headers: {
+        'token': '$token',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End MS LMS Group Code
@@ -261,6 +286,22 @@ class CourseSingleCall {
   static dynamic videoid(dynamic response) => getJsonField(
         response,
         r'''$.video''',
+      );
+  static dynamic postar(dynamic response) => getJsonField(
+        response,
+        r'''$.video_poster''',
+      );
+  static dynamic type(dynamic response) => getJsonField(
+        response,
+        r'''$.type''',
+      );
+  static dynamic previousLessonType(dynamic response) => getJsonField(
+        response,
+        r'''$.prev_lesson_type''',
+      );
+  static dynamic previousLessonId(dynamic response) => getJsonField(
+        response,
+        r'''$.prev_lesson''',
       );
 }
 

@@ -195,6 +195,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             sectionId: params.getParam('sectionId', ParamType.int),
             courseId: params.getParam('courseId', ParamType.int),
           ),
+        ),
+        FFRoute(
+          name: 'h5pContent',
+          path: '/h5pContent',
+          builder: (context, params) => H5pContentWidget(
+            sectionid: params.getParam('sectionid', ParamType.int),
+            courseid: params.getParam('courseid', ParamType.int),
+            lessonDetails: params.getParam('lessonDetails', ParamType.JSON),
+            lessonId: params.getParam('lessonId', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'VideoPlayerPage',
+          path: '/videoPlayerPage',
+          builder: (context, params) => VideoPlayerPageWidget(
+            videoId: params.getParam('videoId', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
