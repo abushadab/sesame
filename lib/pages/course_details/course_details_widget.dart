@@ -53,114 +53,111 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
 
     context.watch<FFAppState>();
 
-    return FutureBuilder<ApiCallResponse>(
-      future: MsLmsGroup.sectionsCall.call(
-        token: '1|3b39b37cb9a70f5c018557f427416b67',
-        id: widget.courseId,
-      ),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: Center(
-              child: SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF1BBDEC),
+          iconTheme: const IconThemeData(color: Colors.white),
+          automaticallyImplyLeading: true,
+          leading: FlutterFlowIconButton(
+            borderWidth: 0.0,
+            buttonSize: 40.0,
+            icon: Icon(
+              Icons.chevron_left_rounded,
+              color: FlutterFlowTheme.of(context).alternate,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pushNamed('worlds');
+            },
+          ),
+          title: Text(
+            'Letter Ocean',
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Atma',
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w800,
+                ),
+          ),
+          actions: [
+            Container(
+              width: 80.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: Image.asset(
+                    'assets/images/scoring_1.png',
+                  ).image,
+                ),
+              ),
+              child: Align(
+                alignment: const AlignmentDirectional(0.30, 0.00),
+                child: Text(
+                  '10',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Atma',
+                        color: FlutterFlowTheme.of(context).warning,
+                        fontWeight: FontWeight.w800,
+                      ),
                 ),
               ),
             ),
-          );
-        }
-        final courseDetailsSectionsResponse = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            appBar: AppBar(
-              backgroundColor: const Color(0xFF1BBDEC),
-              iconTheme: const IconThemeData(color: Colors.white),
-              automaticallyImplyLeading: true,
-              leading: FlutterFlowIconButton(
-                borderWidth: 0.0,
-                buttonSize: 40.0,
-                icon: Icon(
-                  Icons.chevron_left_rounded,
-                  color: FlutterFlowTheme.of(context).alternate,
-                  size: 30.0,
-                ),
-                onPressed: () async {
-                  context.pushNamed('worlds');
-                },
+          ],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
+        body: SafeArea(
+          top: true,
+          child: Container(
+            height: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: Image.asset(
+                  'assets/images/Clip_path_group_(5).png',
+                ).image,
               ),
-              title: Text(
-                'Letter Ocean',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Atma',
-                      color: Colors.white,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.w800,
-                    ),
-              ),
-              actions: [
-                Container(
-                  width: 80.0,
-                  height: 40.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      image: Image.asset(
-                        'assets/images/scoring_1.png',
-                      ).image,
-                    ),
-                  ),
-                  child: Align(
-                    alignment: const AlignmentDirectional(0.30, 0.00),
-                    child: Text(
-                      '10',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Atma',
-                            color: FlutterFlowTheme.of(context).warning,
-                            fontWeight: FontWeight.w800,
-                          ),
-                    ),
-                  ),
-                ),
-              ],
-              centerTitle: true,
-              elevation: 0.0,
             ),
-            body: SafeArea(
-              top: true,
-              child: Container(
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: Image.asset(
-                      'assets/images/Clip_path_group_(5).png',
-                    ).image,
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        height: 300.0,
-                        decoration: const BoxDecoration(),
-                        child: Builder(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    height: 300.0,
+                    decoration: const BoxDecoration(),
+                    child: FutureBuilder<ApiCallResponse>(
+                      future: MsLmsGroup.sectionsCall.call(
+                        token: '1|3b39b37cb9a70f5c018557f427416b67',
+                        id: widget.courseId,
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        final rowSectionsResponse = snapshot.data!;
+                        return Builder(
                           builder: (context) {
                             final sec1 = MsLmsGroup.sectionsCall
                                     .sections(
-                                      courseDetailsSectionsResponse.jsonBody,
+                                      rowSectionsResponse.jsonBody,
                                     )
                                     ?.toList() ??
                                 [];
@@ -323,18 +320,16 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
                               ),
                             );
                           },
-                        ),
-                      ),
-                    ]
-                        .divide(const SizedBox(height: 20.0))
-                        .around(const SizedBox(height: 20.0)),
+                        );
+                      },
+                    ),
                   ),
-                ),
+                ].divide(const SizedBox(height: 20.0)).around(const SizedBox(height: 20.0)),
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -10,10 +10,14 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:flutter/services.dart';
-
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CustomYoutubePlayer extends StatefulWidget {
+  final double? width;
+  final double? height;
+  final String initialVideoId;
+  final Future<dynamic> Function() onEnd;
+
   const CustomYoutubePlayer({
     Key? key,
     this.width,
@@ -22,50 +26,47 @@ class CustomYoutubePlayer extends StatefulWidget {
     required this.onEnd,
   }) : super(key: key);
 
-  final double? width;
-  final double? height;
-  final String initialVideoId;
-  final Future<dynamic> Function() onEnd;
-
   @override
   _CustomYoutubePlayerState createState() => _CustomYoutubePlayerState();
 }
 
 class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
   late YoutubePlayerController _controller;
+  bool _isFullScreen = false;
 
   @override
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: widget.initialVideoId,
-      flags: const YoutubePlayerFlags(
+      flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
-        // disableDragSeek: true,
+        enableCaption: false,
       ),
     )..addListener(listener);
   }
 
   void listener() {
-    var videoDuration = _controller.metadata.duration.inSeconds;
-    var videoTimeToEnableButton = (videoDuration * 0.9).toInt();
-    var currentVideoTime = _controller.value.position.inSeconds;
+    if (_controller.value.isFullScreen != _isFullScreen) {
+      setState(() {
+        _isFullScreen = _controller.value.isFullScreen;
+        if (_isFullScreen) {
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+              overlays: []);
+        } else {
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+              overlays: SystemUiOverlay.values);
+        }
+      });
+    }
 
-    print(currentVideoTime);
-
-    print('Video time to enable button : $videoTimeToEnableButton');
-
-    // Enable the button when 80% of the video is watched
-    if (currentVideoTime >= videoTimeToEnableButton) {
+    if (_controller.value.position.inSeconds >=
+        (_controller.metadata.duration.inSeconds * 0.9).toInt()) {
       FFAppState().update(() {
         FFAppState().videoComplete = true;
       });
-      widget.onEnd;
-    } else {
-      FFAppState().update(() {
-        FFAppState().videoComplete = false;
-      });
+      widget.onEnd();
     }
   }
 
@@ -73,25 +74,22 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
   void dispose() {
     _controller.removeListener(listener);
     _controller.dispose();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        YoutubePlayer(
-          controller: _controller,
-          showVideoProgressIndicator: true,
-          onEnded: (metaData) {
-            // Enable the button when the video ends
-            FFAppState().update(() {
-              FFAppState().videoComplete = true;
-            });
-            widget.onEnd;
-          },
-        ),
-      ],
+    return YoutubePlayer(
+      controller: _controller,
+      showVideoProgressIndicator: true,
+      onEnded: (metaData) {
+        FFAppState().update(() {
+          FFAppState().videoComplete = true;
+        });
+        widget.onEnd();
+      },
     );
   }
 }
