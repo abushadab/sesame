@@ -2,8 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
-import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/flutter_flow_youtube_player.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -81,305 +80,277 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
           );
         }
         final coursesingleSectionsResponse = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
-              child: Container(
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: Image.asset(
-                      'assets/images/Background_Layer.png',
-                    ).image,
-                  ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          20.0, 20.0, 20.0, 20.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          FlutterFlowIconButton(
-                            borderRadius: 5.0,
-                            borderWidth: 0.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).accent1,
-                            icon: Icon(
-                              Icons.arrow_back_rounded,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 24.0,
-                            ),
-                            onPressed: () async {
-                              context.pushNamed(
-                                'CourseDetails',
-                                queryParameters: {
-                                  'courseId': serializeParam(
-                                    1073,
-                                    ParamType.int,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+        return YoutubeFullScreenWrapper(
+          child: GestureDetector(
+            onTap: () => _model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
+            child: Scaffold(
+              key: scaffoldKey,
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              body: SafeArea(
+                top: true,
+                child: Container(
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: Image.asset(
+                        'assets/images/Background_Layer.png',
+                      ).image,
                     ),
-                    Expanded(
-                      child: Padding(
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            20.0, 0.0, 20.0, 0.0),
-                        child: FutureBuilder<ApiCallResponse>(
-                          future: (_model.apiRequestCompleter ??=
-                                  Completer<ApiCallResponse>()
-                                    ..complete(CourseSingleCall.call(
-                                      token:
-                                          '1|3b39b37cb9a70f5c018557f427416b67',
-                                      courseId: widget.courseId,
-                                      itemId:
-                                          functions.returnFirstMetarialItemId(
-                                              MsLmsGroup.sectionsCall
-                                                  .materials(
-                                                    coursesingleSectionsResponse
-                                                        .jsonBody,
-                                                  )!
-                                                  .where((e) =>
-                                                      widget.sectionId ==
-                                                      getJsonField(
-                                                        e,
-                                                        r'''$.section_id''',
-                                                      ))
-                                                  .toList(),
-                                              widget.sectionId!),
-                                    )))
-                              .future,
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
+                            20.0, 20.0, 20.0, 20.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderRadius: 5.0,
+                              borderWidth: 0.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).accent1,
+                              icon: Icon(
+                                Icons.arrow_back_rounded,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                context.pushNamed(
+                                  'CourseDetails',
+                                  queryParameters: {
+                                    'courseId': serializeParam(
+                                      1073,
+                                      ParamType.int,
                                     ),
-                                  ),
-                                ),
-                              );
-                            }
-                            final columnCourseSingleResponse = snapshot.data!;
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Expanded(
+                                  }.withoutNulls,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 0.0),
+                          child: FutureBuilder<ApiCallResponse>(
+                            future: (_model.apiRequestCompleter ??=
+                                    Completer<ApiCallResponse>()
+                                      ..complete(CourseSingleCall.call(
+                                        token:
+                                            '1|3b39b37cb9a70f5c018557f427416b67',
+                                        courseId: widget.courseId,
+                                        itemId:
+                                            functions.returnFirstMetarialItemId(
+                                                MsLmsGroup.sectionsCall
+                                                    .materials(
+                                                      coursesingleSectionsResponse
+                                                          .jsonBody,
+                                                    )!
+                                                    .where((e) =>
+                                                        widget.sectionId ==
+                                                        getJsonField(
+                                                          e,
+                                                          r'''$.section_id''',
+                                                        ))
+                                                    .toList(),
+                                                widget.sectionId!),
+                                      )))
+                                .future,
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
                                   child: SizedBox(
-                                    width: double.infinity,
-                                    height: 500.0,
-                                    child: custom_widgets.CustomYoutubePlayer(
-                                      width: double.infinity,
-                                      height: 500.0,
-                                      initialVideoId: CourseSingleCall.param(
-                                        columnCourseSingleResponse.jsonBody,
-                                      ).toString(),
-                                      onEnd: () async {
-                                        _model.apiResultse6 = await MsLmsGroup
-                                            .completeALessonCall
-                                            .call(
-                                          courseId: widget.courseId,
-                                          itemId: functions
-                                              .returnFirstMetarialItemId(
-                                                  MsLmsGroup.sectionsCall
-                                                      .materials(
-                                                        coursesingleSectionsResponse
-                                                            .jsonBody,
-                                                      )!
-                                                      .where((e) =>
-                                                          widget.sectionId ==
-                                                          getJsonField(
-                                                            e,
-                                                            r'''$.section_id''',
-                                                          ))
-                                                      .toList(),
-                                                  widget.sectionId!),
-                                          token:
-                                              '1|3b39b37cb9a70f5c018557f427416b67',
-                                        );
-                                        if ((_model.apiResultse6?.succeeded ??
-                                            true)) {
-                                          await actions.customToast(
-                                            context,
-                                            'Lesson Completed',
-                                            const Color(0x00000000),
-                                          );
-                                        }
-
-                                        setState(() {});
-                                      },
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 20.0, 0.0, 20.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      if (CourseSingleCall.previousLessonId(
-                                            columnCourseSingleResponse.jsonBody,
-                                          ) !=
-                                          null)
+                                );
+                              }
+                              final columnCourseSingleResponse = snapshot.data!;
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: FlutterFlowYoutubePlayer(
+                                      url:
+                                          'https://www.youtube.com/watch?v=${CourseSingleCall.param(
+                                        columnCourseSingleResponse.jsonBody,
+                                      ).toString()}',
+                                      autoPlay: false,
+                                      looping: true,
+                                      mute: false,
+                                      showControls: true,
+                                      showFullScreen: true,
+                                      strictRelatedVideos: true,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 20.0, 0.0, 20.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        if (CourseSingleCall.previousLessonId(
+                                              columnCourseSingleResponse
+                                                  .jsonBody,
+                                            ) !=
+                                            null)
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 10.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderRadius: 8.0,
+                                                borderWidth: 0.0,
+                                                buttonSize: 40.0,
+                                                fillColor: const Color(0xFF9B0FFF),
+                                                icon: Icon(
+                                                  Icons
+                                                      .arrow_back_ios_new_rounded,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () async {
+                                                  context.safePop();
+                                                },
+                                              ),
+                                            ),
+                                          ),
                                         Expanded(
                                           child: Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 10.0, 0.0),
+                                                    10.0, 0.0, 0.0, 0.0),
                                             child: FlutterFlowIconButton(
+                                              borderColor: Colors.transparent,
                                               borderRadius: 8.0,
                                               borderWidth: 0.0,
                                               buttonSize: 40.0,
                                               fillColor: const Color(0xFF9B0FFF),
                                               icon: Icon(
                                                 Icons
-                                                    .arrow_back_ios_new_rounded,
+                                                    .arrow_forward_ios_outlined,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
                                                 size: 24.0,
                                               ),
+                                              showLoadingIndicator: true,
                                               onPressed: () async {
-                                                context.safePop();
+                                                setState(() =>
+                                                    _model.apiRequestCompleter =
+                                                        null);
+                                                await _model
+                                                    .waitForApiRequestCompleted();
+                                                if (CourseSingleCall.completed(
+                                                  columnCourseSingleResponse
+                                                      .jsonBody,
+                                                )) {
+                                                  if (CourseSingleCall
+                                                          .nextlessontype(
+                                                        columnCourseSingleResponse
+                                                            .jsonBody,
+                                                      ).toString() ==
+                                                      'text') {
+                                                    context.pushNamed(
+                                                      'h5pContent',
+                                                      queryParameters: {
+                                                        'sectionid':
+                                                            serializeParam(
+                                                          widget.sectionId,
+                                                          ParamType.int,
+                                                        ),
+                                                        'courseid':
+                                                            serializeParam(
+                                                          widget.courseId,
+                                                          ParamType.int,
+                                                        ),
+                                                        'lessonId':
+                                                            serializeParam(
+                                                          CourseSingleCall
+                                                              .nextlesson(
+                                                            columnCourseSingleResponse
+                                                                .jsonBody,
+                                                          ),
+                                                          ParamType.int,
+                                                        ),
+                                                      }.withoutNulls,
+                                                    );
+                                                  } else {
+                                                    context.pushNamed(
+                                                      'coursesingle',
+                                                      queryParameters: {
+                                                        'sectionId':
+                                                            serializeParam(
+                                                          widget.sectionId,
+                                                          ParamType.int,
+                                                        ),
+                                                        'courseId':
+                                                            serializeParam(
+                                                          widget.courseId,
+                                                          ParamType.int,
+                                                        ),
+                                                      }.withoutNulls,
+                                                    );
+                                                  }
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Please complete this lesson first',
+                                                        style: TextStyle(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                      ),
+                                                      duration: const Duration(
+                                                          milliseconds: 4000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .warning,
+                                                    ),
+                                                  );
+                                                }
+
+                                                setState(() =>
+                                                    _model.apiRequestCompleter =
+                                                        null);
+                                                await _model
+                                                    .waitForApiRequestCompleted();
                                               },
                                             ),
                                           ),
                                         ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 0.0, 0.0, 0.0),
-                                          child: FlutterFlowIconButton(
-                                            borderColor: Colors.transparent,
-                                            borderRadius: 8.0,
-                                            borderWidth: 0.0,
-                                            buttonSize: 40.0,
-                                            fillColor: const Color(0xFF9B0FFF),
-                                            icon: Icon(
-                                              Icons.arrow_forward_ios_outlined,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              size: 24.0,
-                                            ),
-                                            showLoadingIndicator: true,
-                                            onPressed: () async {
-                                              setState(() => _model
-                                                  .apiRequestCompleter = null);
-                                              await _model
-                                                  .waitForApiRequestCompleted();
-                                              if (CourseSingleCall.completed(
-                                                columnCourseSingleResponse
-                                                    .jsonBody,
-                                              )) {
-                                                if (CourseSingleCall
-                                                        .nextlessontype(
-                                                      columnCourseSingleResponse
-                                                          .jsonBody,
-                                                    ).toString() ==
-                                                    'text') {
-                                                  context.pushNamed(
-                                                    'h5pContent',
-                                                    queryParameters: {
-                                                      'sectionid':
-                                                          serializeParam(
-                                                        widget.sectionId,
-                                                        ParamType.int,
-                                                      ),
-                                                      'courseid':
-                                                          serializeParam(
-                                                        widget.courseId,
-                                                        ParamType.int,
-                                                      ),
-                                                      'lessonId':
-                                                          serializeParam(
-                                                        CourseSingleCall
-                                                            .nextlesson(
-                                                          columnCourseSingleResponse
-                                                              .jsonBody,
-                                                        ),
-                                                        ParamType.int,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                } else {
-                                                  context.pushNamed(
-                                                    'coursesingle',
-                                                    queryParameters: {
-                                                      'sectionId':
-                                                          serializeParam(
-                                                        widget.sectionId,
-                                                        ParamType.int,
-                                                      ),
-                                                      'courseId':
-                                                          serializeParam(
-                                                        widget.courseId,
-                                                        ParamType.int,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                }
-                                              } else {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'Please complete this lesson first',
-                                                      style: TextStyle(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                    ),
-                                                    duration: const Duration(
-                                                        milliseconds: 4000),
-                                                    backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .warning,
-                                                  ),
-                                                );
-                                              }
-
-                                              setState(() => _model
-                                                  .apiRequestCompleter = null);
-                                              await _model
-                                                  .waitForApiRequestCompleted();
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            );
-                          },
+                                ],
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
