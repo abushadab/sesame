@@ -31,3 +31,6 @@ export '/pages/course_details/course_details_widget.dart'
 export '/pages/worlds/worlds_widget.dart' show WorldsWidget;
 export '/pages/world1/world1_widget.dart' show World1Widget;
 export '/pages/coursesingle/coursesingle_widget.dart' show CoursesingleWidget;
+export '/pages/h5p_content/h5p_content_widget.dart' show H5pContentWidget;
+export '/video_player_page/video_player_page_widget.dart'
+    show VideoPlayerPageWidget;

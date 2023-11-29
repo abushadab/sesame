@@ -274,6 +274,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              if (_model.formKey.currentState == null ||
+                                  !_model.formKey.currentState!.validate()) {
+                                return;
+                              }
                               _model.verifyOtp =
                                   await OneclickLoginAndSignupCall.call(
                                 mobileNo: _model.phoneNumberController.text,

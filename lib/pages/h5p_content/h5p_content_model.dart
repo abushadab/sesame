@@ -1,15 +1,13 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'coursesingle_widget.dart' show CoursesingleWidget;
 import 'dart:async';
+import 'h5p_content_widget.dart' show H5pContentWidget;
 import 'package:flutter/material.dart';
 
-class CoursesingleModel extends FlutterFlowModel<CoursesingleWidget> {
+class H5pContentModel extends FlutterFlowModel<H5pContentWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (Complete A Lesson)] action in CustomYoutubePlayer widget.
-  ApiCallResponse? apiResultse6;
   Completer<ApiCallResponse>? apiRequestCompleter;
 
   /// Initialization and disposal methods.
