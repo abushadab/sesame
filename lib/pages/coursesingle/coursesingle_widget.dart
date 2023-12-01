@@ -207,6 +207,29 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                                 ).toString(),
                                                 ParamType.String,
                                               ),
+                                              'courseId': serializeParam(
+                                                widget.courseId,
+                                                ParamType.int,
+                                              ),
+                                              'itemId': serializeParam(
+                                                functions
+                                                    .returnFirstMetarialItemId(
+                                                        MsLmsGroup.sectionsCall
+                                                            .materials(
+                                                              coursesingleSectionsResponse
+                                                                  .jsonBody,
+                                                            )!
+                                                            .where((e) =>
+                                                                widget
+                                                                    .sectionId ==
+                                                                getJsonField(
+                                                                  e,
+                                                                  r'''$.section_id''',
+                                                                ))
+                                                            .toList(),
+                                                        widget.sectionId!),
+                                                ParamType.int,
+                                              ),
                                             }.withoutNulls,
                                           );
                                         },
@@ -223,7 +246,7 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                                     columnCourseSingleResponse
                                                         .jsonBody,
                                                   ),
-                                                  width: 300.0,
+                                                  width: 350.0,
                                                   height: 200.0,
                                                   fit: BoxFit.cover,
                                                 ),
@@ -278,7 +301,8 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                             setState(() => _model
                                                 .apiRequestCompleter = null);
                                             await _model
-                                                .waitForApiRequestCompleted();
+                                                .waitForApiRequestCompleted(
+                                                    minWait: 5000);
                                             if (CourseSingleCall.completed(
                                               columnCourseSingleResponse
                                                   .jsonBody,

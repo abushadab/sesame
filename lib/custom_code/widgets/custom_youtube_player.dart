@@ -42,10 +42,10 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer>
     _controller = YoutubePlayerController(
       initialVideoId: widget.initialVideoId,
       flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-        enableCaption: false,
-      ),
+          autoPlay: false,
+          mute: false,
+          enableCaption: false,
+          disableDragSeek: true),
     )..addListener(listener);
   }
 

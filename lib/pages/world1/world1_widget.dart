@@ -84,12 +84,29 @@ class _World1WidgetState extends State<World1Widget> {
                       children: [
                         Align(
                           alignment: const AlignmentDirectional(0.00, -0.20),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              'assets/images/Group_(6).png',
-                              width: 150.0,
-                              fit: BoxFit.contain,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                'CourseDetails',
+                                queryParameters: {
+                                  'courseId': serializeParam(
+                                    1073,
+                                    ParamType.int,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/Group_(6).png',
+                                width: 150.0,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         ),

@@ -106,7 +106,7 @@ class _WorldsWidgetState extends State<WorldsWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
-                          width: MediaQuery.sizeOf(context).width * 0.78,
+                          width: 300.0,
                           decoration: BoxDecoration(
                             color: const Color(0xFF2D4687),
                             borderRadius: BorderRadius.circular(30.0),
@@ -125,7 +125,6 @@ class _WorldsWidgetState extends State<WorldsWidget> {
                                 },
                                 child: Image.asset(
                                   'assets/images/Group.png',
-                                  height: 200.0,
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -147,7 +146,7 @@ class _WorldsWidgetState extends State<WorldsWidget> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * 0.78,
+                          width: 300.0,
                           decoration: BoxDecoration(
                             color: const Color(0xFF2D4687),
                             borderRadius: BorderRadius.circular(30.0),
@@ -166,7 +165,6 @@ class _WorldsWidgetState extends State<WorldsWidget> {
                                 },
                                 child: Image.asset(
                                   'assets/images/Group_(1).png',
-                                  height: 200.0,
                                   fit: BoxFit.contain,
                                 ),
                               ),
