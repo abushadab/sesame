@@ -211,6 +211,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/videoPlayerPage',
           builder: (context, params) => VideoPlayerPageWidget(
             videoId: params.getParam('videoId', ParamType.String),
+            courseId: params.getParam('courseId', ParamType.int),
+            itemId: params.getParam('itemId', ParamType.int),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

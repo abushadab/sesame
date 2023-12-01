@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/section_loading_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -66,7 +67,7 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: const Color(0xFF1BBDEC),
         appBar: AppBar(
           backgroundColor: const Color(0xFF1BBDEC),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -123,6 +124,7 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
         body: SafeArea(
           top: true,
           child: Container(
+            width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -142,16 +144,8 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            FlutterFlowTheme.of(context).primary,
-                          ),
-                        ),
-                      ),
+                    return const Center(
+                      child: SectionLoadingWidget(),
                     );
                   }
                   final rowSectionsResponse = snapshot.data!;
@@ -167,6 +161,7 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: List.generate(sec1.length, (sec1Index) {
                             final sec1Item = sec1[sec1Index];
                             return InkWell(
@@ -193,8 +188,11 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
                                 );
                               },
                               child: Container(
-                                width: 260.0,
+                                width: 300.0,
                                 height: 250.0,
+                                constraints: const BoxConstraints(
+                                  maxWidth: 300.0,
+                                ),
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -230,11 +228,11 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
+                                          10.0, 8.0, 10.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             getJsonField(

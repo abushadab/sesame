@@ -1,3 +1,5 @@
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -14,9 +16,13 @@ class VideoPlayerPageWidget extends StatefulWidget {
   const VideoPlayerPageWidget({
     super.key,
     required this.videoId,
+    this.courseId,
+    this.itemId,
   });
 
   final String? videoId;
+  final int? courseId;
+  final int? itemId;
 
   @override
   _VideoPlayerPageWidgetState createState() => _VideoPlayerPageWidgetState();
@@ -76,30 +82,33 @@ class _VideoPlayerPageWidgetState extends State<VideoPlayerPageWidget> {
                   width: double.infinity,
                   height: double.infinity,
                   initialVideoId: widget.videoId!,
-                  onEnd: () async {},
+                  onEnd: () async {
+                    _model.apiResultffw =
+                        await MsLmsGroup.completeALessonCall.call(
+                      courseId: widget.courseId,
+                      itemId: widget.itemId,
+                      token: currentAuthenticationToken,
+                    );
+
+                    setState(() {});
+                  },
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 8.0,
-                      borderWidth: 0.0,
-                      buttonSize: 40.0,
-                      icon: Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).alternate,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        context.pop();
-                      },
-                    ),
-                  ],
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
+                child: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 8.0,
+                  borderWidth: 0.0,
+                  buttonSize: 40.0,
+                  icon: Icon(
+                    Icons.arrow_back_rounded,
+                    color: FlutterFlowTheme.of(context).alternate,
+                    size: 24.0,
+                  ),
+                  onPressed: () async {
+                    context.pop();
+                  },
                 ),
               ),
             ],
