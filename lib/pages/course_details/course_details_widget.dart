@@ -2,8 +2,10 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,11 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CourseDetailsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.setLandscapeMode();
+    });
   }
 
   @override
@@ -68,7 +75,7 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
             borderWidth: 0.0,
             buttonSize: 40.0,
             icon: Icon(
-              Icons.chevron_left_rounded,
+              Icons.arrow_back_rounded,
               color: FlutterFlowTheme.of(context).alternate,
               size: 30.0,
             ),
@@ -121,210 +128,188 @@ class _CourseDetailsWidgetState extends State<CourseDetailsWidget> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: Image.asset(
-                  'assets/images/Clip_path_group_(5).png',
+                  'assets/images/background.png',
                 ).image,
               ),
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    height: 300.0,
-                    decoration: const BoxDecoration(),
-                    child: FutureBuilder<ApiCallResponse>(
-                      future: MsLmsGroup.sectionsCall.call(
-                        token: '1|3b39b37cb9a70f5c018557f427416b67',
-                        id: widget.courseId,
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+              child: FutureBuilder<ApiCallResponse>(
+                future: MsLmsGroup.sectionsCall.call(
+                  token: '1|3b39b37cb9a70f5c018557f427416b67',
+                  id: widget.courseId,
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
                       ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
+                    );
+                  }
+                  final rowSectionsResponse = snapshot.data!;
+                  return Builder(
+                    builder: (context) {
+                      final sec1 = MsLmsGroup.sectionsCall
+                              .sections(
+                                rowSectionsResponse.jsonBody,
+                              )
+                              ?.toList() ??
+                          [];
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: List.generate(sec1.length, (sec1Index) {
+                            final sec1Item = sec1[sec1Index];
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  'coursesingle',
+                                  queryParameters: {
+                                    'sectionId': serializeParam(
+                                      getJsonField(
+                                        sec1Item,
+                                        r'''$.id''',
+                                      ),
+                                      ParamType.int,
+                                    ),
+                                    'courseId': serializeParam(
+                                      widget.courseId,
+                                      ParamType.int,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              },
+                              child: Container(
+                                width: 260.0,
+                                height: 250.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(30.0),
                                 ),
-                              ),
-                            ),
-                          );
-                        }
-                        final rowSectionsResponse = snapshot.data!;
-                        return Builder(
-                          builder: (context) {
-                            final sec1 = MsLmsGroup.sectionsCall
-                                    .sections(
-                                      rowSectionsResponse.jsonBody,
-                                    )
-                                    ?.toList() ??
-                                [];
-                            return SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children:
-                                    List.generate(sec1.length, (sec1Index) {
-                                  final sec1Item = sec1[sec1Index];
-                                  return InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
-                                        'coursesingle',
-                                        queryParameters: {
-                                          'sectionId': serializeParam(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            3.0, 3.0, 3.0, 0.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                          child: Image.network(
                                             getJsonField(
                                               sec1Item,
-                                              r'''$.id''',
+                                              r'''$.img''',
                                             ),
-                                            ParamType.int,
-                                          ),
-                                          'courseId': serializeParam(
-                                            widget.courseId,
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Container(
-                                      width: 260.0,
-                                      height: 250.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    3.0, 3.0, 3.0, 0.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                              child: Image.network(
-                                                getJsonField(
-                                                  sec1Item,
-                                                  r'''$.img''',
-                                                ),
-                                                width: 300.0,
-                                                height: 150.0,
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (context, error,
-                                                        stackTrace) =>
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
                                                     Image.asset(
-                                                  'assets/images/error_image.png',
-                                                  width: 300.0,
-                                                  height: 150.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
+                                              'assets/images/error_image.png',
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 8.0, 0.0, 0.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Text(
-                                                  getJsonField(
-                                                    sec1Item,
-                                                    r'''$.title''',
-                                                  ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color:
-                                                            const Color(0xFF8A8A8A),
-                                                      ),
-                                                ),
-                                                Text(
-                                                  '3:00 Min',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color:
-                                                            const Color(0xFF8A8A8A),
-                                                      ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 220.0,
-                                            child: Divider(
-                                              thickness: 1.0,
-                                              color: Color(0xFF8A8A8A),
-                                            ),
-                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
                                           Text(
-                                            'Feedback',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                          ),
-                                          Text(
-                                            'Fron 1 to 5',
+                                            getJsonField(
+                                              sec1Item,
+                                              r'''$.title''',
+                                            ).toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Readex Pro',
-                                                  fontSize: 7.0,
+                                                  color: const Color(0xFF8A8A8A),
                                                 ),
                                           ),
-                                          RatingBarIndicator(
-                                            itemBuilder: (context, index) =>
-                                                Icon(
-                                              Icons.star_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiary,
-                                            ),
-                                            direction: Axis.horizontal,
-                                            rating:
-                                                functions.raingsStringtoDouble(
-                                                    getJsonField(
-                                              sec1Item,
-                                              r'''$.ratings''',
-                                            ).toString()),
-                                            unratedColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .accent3,
-                                            itemCount: 5,
-                                            itemSize: 20.0,
+                                          Text(
+                                            '3:00 Min',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: const Color(0xFF8A8A8A),
+                                                ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  );
-                                })
-                                        .divide(const SizedBox(width: 20.0))
-                                        .around(const SizedBox(width: 20.0)),
+                                    const SizedBox(
+                                      width: 220.0,
+                                      child: Divider(
+                                        thickness: 1.0,
+                                        color: Color(0xFF8A8A8A),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Feedback',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                    Text(
+                                      'Fron 1 to 5',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 7.0,
+                                          ),
+                                    ),
+                                    RatingBarIndicator(
+                                      itemBuilder: (context, index) => Icon(
+                                        Icons.star_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                      direction: Axis.horizontal,
+                                      rating: functions
+                                          .raingsStringtoDouble(getJsonField(
+                                        sec1Item,
+                                        r'''$.ratings''',
+                                      ).toString()),
+                                      unratedColor:
+                                          FlutterFlowTheme.of(context).accent3,
+                                      itemCount: 5,
+                                      itemSize: 20.0,
+                                    ),
+                                  ].addToEnd(const SizedBox(height: 10.0)),
+                                ),
                               ),
                             );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ].divide(const SizedBox(height: 20.0)).around(const SizedBox(height: 20.0)),
+                          })
+                              .divide(const SizedBox(width: 20.0))
+                              .around(const SizedBox(width: 20.0)),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ),

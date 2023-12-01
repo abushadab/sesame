@@ -1,8 +1,10 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'video_player_page_model.dart';
@@ -29,6 +31,11 @@ class _VideoPlayerPageWidgetState extends State<VideoPlayerPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => VideoPlayerPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.setLandscapeMode();
+    });
   }
 
   @override
@@ -83,10 +90,9 @@ class _VideoPlayerPageWidgetState extends State<VideoPlayerPageWidget> {
                       borderRadius: 8.0,
                       borderWidth: 0.0,
                       buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).accent1,
                       icon: Icon(
-                        Icons.chevron_left_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
+                        Icons.arrow_back_rounded,
+                        color: FlutterFlowTheme.of(context).alternate,
                         size: 24.0,
                       ),
                       onPressed: () async {

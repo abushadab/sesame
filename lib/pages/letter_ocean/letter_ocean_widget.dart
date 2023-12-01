@@ -1,7 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'letter_ocean_model.dart';
@@ -23,6 +25,11 @@ class _LetterOceanWidgetState extends State<LetterOceanWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LetterOceanModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.setPortraitMode();
+    });
   }
 
   @override

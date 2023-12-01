@@ -232,6 +232,52 @@ class OneclickLoginAndSignupCall {
       );
 }
 
+class SignupCall {
+  static Future<ApiCallResponse> call({
+    String? countrycode = '+880',
+    String? mobileNo = '',
+    String? otp = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Signup',
+      apiUrl: 'https://hostkoro.com/sarath/wp-json/digits/v1/create_user',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'digits_reg_countrycode': countrycode,
+        'digits_reg_mobile': mobileNo,
+        'otp': otp,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic loginsuccess(dynamic response) => getJsonField(
+        response,
+        r'''$.success''',
+      );
+  static dynamic dataaccesstoken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.access_token''',
+      );
+  static dynamic datatokentype(dynamic response) => getJsonField(
+        response,
+        r'''$.data.token_type''',
+      );
+  static dynamic dataztoken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.ztoken''',
+      );
+  static dynamic datamsg(dynamic response) => getJsonField(
+        response,
+        r'''$.data.msg''',
+      );
+}
+
 class CourseSingleCall {
   static Future<ApiCallResponse> call({
     String? token = '1|3b39b37cb9a70f5c018557f427416b67',

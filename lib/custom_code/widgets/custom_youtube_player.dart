@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import '/flutter_flow/flutter_flow_util.dart' show routeObserver;
 
 class CustomYoutubePlayer extends StatefulWidget {
   final double? width;
@@ -30,7 +31,8 @@ class CustomYoutubePlayer extends StatefulWidget {
   _CustomYoutubePlayerState createState() => _CustomYoutubePlayerState();
 }
 
-class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
+class _CustomYoutubePlayerState extends State<CustomYoutubePlayer>
+    with RouteAware {
   late YoutubePlayerController _controller;
   bool _isFullScreen = false;
 
@@ -40,7 +42,7 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
     _controller = YoutubePlayerController(
       initialVideoId: widget.initialVideoId,
       flags: YoutubePlayerFlags(
-        autoPlay: true,
+        autoPlay: false,
         mute: false,
         enableCaption: false,
       ),
@@ -61,21 +63,48 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
       });
     }
 
-    if (_controller.value.position.inSeconds >=
-        (_controller.metadata.duration.inSeconds * 0.9).toInt()) {
-      FFAppState().update(() {
-        FFAppState().videoComplete = true;
-      });
-      widget.onEnd();
+    // if (_controller.value.position.inSeconds >=
+    //     (_controller.metadata.duration.inSeconds * 0.9).toInt()) {
+    //   FFAppState().update(() {
+    //     FFAppState().videoComplete = true;
+    //   });
+    //   widget.onEnd();
+    // }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPushNext() {
+    if (_controller.value.isPlaying) {
+      _controller.pause();
     }
   }
 
   @override
+  void didPopNext() {
+    if (_controller.value.isPlaying) {
+      _controller.pause();
+    }
+  }
+
+  @override
+  void deactivate() {
+    if (_controller.value.isPlaying) {
+      _controller.pause();
+    }
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
+    routeObserver.unsubscribe(this);
     _controller.removeListener(listener);
     _controller.dispose();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
     super.dispose();
   }
 
