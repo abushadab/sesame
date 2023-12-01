@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'worlds_model.dart';
@@ -22,6 +24,11 @@ class _WorldsWidgetState extends State<WorldsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => WorldsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.setLandscapeMode();
+    });
   }
 
   @override
@@ -74,7 +81,7 @@ class _WorldsWidgetState extends State<WorldsWidget> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(30.0, 30.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -92,235 +99,101 @@ class _WorldsWidgetState extends State<WorldsWidget> {
                     ),
                   ],
                 ),
-                Builder(
-                  builder: (context) {
-                    if (() {
-                      if (MediaQuery.sizeOf(context).width < kBreakpointSmall) {
-                        return false;
-                      } else if (MediaQuery.sizeOf(context).width <
-                          kBreakpointMedium) {
-                        return false;
-                      } else if (MediaQuery.sizeOf(context).width <
-                          kBreakpointLarge) {
-                        return true;
-                      } else {
-                        return true;
-                      }
-                    }()) {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 320.0,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF2D4687),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        3.0, 3.0, 3.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed('world1');
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                        child: Image.asset(
-                                          'assets/images/Layer_2.png',
-                                          width: 320.0,
-                                          height: 200.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Big and Small Emotions',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Atma',
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w800,
-                                        ),
-                                  ),
-                                ].addToEnd(const SizedBox(height: 20.0)),
-                              ),
-                            ),
-                            Container(
-                              width: 320.0,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF2D4687),
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        3.0, 3.0, 3.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed('world1');
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                        child: Image.asset(
-                                          'assets/images/Group_(5).png',
-                                          width: 320.0,
-                                          height: 200.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    'World of Mathematics',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Atma',
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w800,
-                                        ),
-                                  ),
-                                ].addToEnd(const SizedBox(height: 20.0)),
-                              ),
-                            ),
-                          ]
-                              .divide(const SizedBox(width: 20.0))
-                              .around(const SizedBox(width: 20.0)),
-                        ),
-                      );
-                    } else {
-                      return Align(
-                        alignment: const AlignmentDirectional(0.00, -1.00),
-                        child: SingleChildScrollView(
+                Expanded(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.78,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF2D4687),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
                           child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                width: 320.0,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF2D4687),
-                                  borderRadius: BorderRadius.circular(30.0),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          3.0, 3.0, 3.0, 0.0),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed('world1');
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                          child: Image.asset(
-                                            'assets/images/Layer_2.png',
-                                            width: 320.0,
-                                            height: 200.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      'Big and Small Emotions',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Atma',
-                                            color: Colors.white,
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w800,
-                                          ),
-                                    ),
-                                  ].addToEnd(const SizedBox(height: 20.0)),
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed('world1');
+                                },
+                                child: Image.asset(
+                                  'assets/images/Group.png',
+                                  height: 200.0,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
-                              Container(
-                                width: 320.0,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF2D4687),
-                                  borderRadius: BorderRadius.circular(30.0),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          3.0, 3.0, 3.0, 0.0),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed('world1');
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                          child: Image.asset(
-                                            'assets/images/Group_(5).png',
-                                            width: 320.0,
-                                            height: 200.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
+                              Text(
+                                'Big and Small Emotions',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Atma',
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w800,
                                     ),
-                                    Text(
-                                      'World of Mathematics',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Atma',
-                                            color: Colors.white,
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w800,
-                                          ),
-                                    ),
-                                  ].addToEnd(const SizedBox(height: 20.0)),
-                                ),
                               ),
-                            ].divide(const SizedBox(height: 20.0)),
+                            ]
+                                .divide(const SizedBox(height: 10.0))
+                                .addToEnd(const SizedBox(height: 10.0)),
                           ),
                         ),
-                      );
-                    }
-                  },
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.78,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF2D4687),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed('world1');
+                                },
+                                child: Image.asset(
+                                  'assets/images/Group_(1).png',
+                                  height: 200.0,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              Text(
+                                'Big and Small Emotions',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Atma',
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                              ),
+                            ]
+                                .divide(const SizedBox(height: 10.0))
+                                .addToEnd(const SizedBox(height: 10.0)),
+                          ),
+                        ),
+                      ]
+                          .divide(const SizedBox(width: 20.0))
+                          .around(const SizedBox(width: 20.0)),
+                    ),
+                  ),
                 ),
-              ].divide(const SizedBox(height: 20.0)),
+              ].divide(const SizedBox(height: 10.0)).addToEnd(const SizedBox(height: 10.0)),
             ),
           ),
         ),

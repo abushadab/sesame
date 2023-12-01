@@ -75,7 +75,7 @@ class _TeacherProfileLinkWidgetState extends State<TeacherProfileLinkWidget> {
                     alignment: AlignmentDirectional(-1.00, 0.00),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 50.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(20.0, 30.0, 0.0, 0.0),
                       child: Icon(
                         Icons.arrow_back_outlined,
                         color: Colors.white,
@@ -83,74 +83,73 @@ class _TeacherProfileLinkWidgetState extends State<TeacherProfileLinkWidget> {
                       ),
                     ),
                   ),
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            30.0, 100.0, 30.0, 0.0),
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 0.3,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF2D4687),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 0.0),
-                                child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 0.3,
-                                  height:
-                                      MediaQuery.sizeOf(context).width * 0.3,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Image.asset(
-                                    'assets/images/Profile_Image_&_Details.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 0.0),
-                                child: Text(
-                                  'Rekha Singh',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Atma',
-                                        color: Colors.white,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 0.0),
-                                child: Text(
-                                  'Affiliate Link',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Atma',
-                                        color: const Color(0xFFFFC600),
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(30.0, 100.0, 30.0, 0.0),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF2D4687),
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
-                    ],
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            height: MediaQuery.sizeOf(context).width * 0.3,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFD8D8D8),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).info,
+                                width: 5.0,
+                              ),
+                            ),
+                            alignment: const AlignmentDirectional(0.00, 0.00),
+                            child: Image.asset(
+                              'assets/images/girl_(2)_1.png',
+                              height: 70.0,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 20.0, 0.0, 0.0),
+                            child: Text(
+                              'Rekha Singh',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Atma',
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Text(
+                              'Affiliate Link',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Atma',
+                                    color: const Color(0xFFFFC600),
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                          ),
+                        ]
+                            .divide(const SizedBox(height: 5.0))
+                            .addToStart(const SizedBox(height: 30.0))
+                            .addToEnd(const SizedBox(height: 30.0)),
+                      ),
+                    ),
                   ),
                   Padding(
                     padding:

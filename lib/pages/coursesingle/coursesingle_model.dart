@@ -8,8 +8,6 @@ class CoursesingleModel extends FlutterFlowModel<CoursesingleWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (Complete A Lesson)] action in CustomYoutubePlayer widget.
-  ApiCallResponse? apiResultts7;
   Completer<ApiCallResponse>? apiRequestCompleter;
 
   /// Initialization and disposal methods.
