@@ -78,7 +78,7 @@ class _H5pContentWidgetState extends State<H5pContentWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: const Color(0x004B39EF),
+            backgroundColor: Colors.transparent,
             body: Center(
               child: SizedBox(
                 width: 50.0,
@@ -99,7 +99,7 @@ class _H5pContentWidgetState extends State<H5pContentWidget> {
               : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: const Color(0x004B39EF),
+            backgroundColor: Colors.transparent,
             body: SafeArea(
               top: true,
               child: Container(
@@ -113,6 +113,7 @@ class _H5pContentWidgetState extends State<H5pContentWidget> {
                   ),
                 ),
                 child: Stack(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
                   children: [
                     Column(
                       mainAxisSize: MainAxisSize.max,
@@ -128,153 +129,152 @@ class _H5pContentWidgetState extends State<H5pContentWidget> {
                             horizontalScroll: false,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 20.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.safePop();
-                                },
-                                child: Image.asset(
-                                  'assets/images/back_btn.png',
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  decoration: const BoxDecoration(),
-                                ),
-                              ),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  setState(
-                                      () => _model.apiRequestCompleter = null);
-                                  await _model.waitForApiRequestCompleted(
-                                      minWait: 500);
-                                  if (CourseSingleCall.completed(
-                                    h5pContentCourseSingleResponse.jsonBody,
-                                  )) {
-                                    if (CourseSingleCall.nextlessonavailable(
-                                      h5pContentCourseSingleResponse.jsonBody,
-                                    )) {
-                                      if (CourseSingleCall.nextlessontype(
-                                            h5pContentCourseSingleResponse
-                                                .jsonBody,
-                                          ).toString() ==
-                                          'video') {
-                                        context.pushNamed(
-                                          'coursesingle',
-                                          queryParameters: {
-                                            'sectionId': serializeParam(
-                                              widget.sectionid! + 1,
-                                              ParamType.int,
-                                            ),
-                                            'courseId': serializeParam(
-                                              widget.courseid,
-                                              ParamType.int,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      } else {
-                                        context.pushNamed(
-                                          'h5pContent',
-                                          queryParameters: {
-                                            'sectionid': serializeParam(
-                                              widget.sectionid,
-                                              ParamType.int,
-                                            ),
-                                            'courseid': serializeParam(
-                                              widget.courseid,
-                                              ParamType.int,
-                                            ),
-                                            'lessonId': serializeParam(
-                                              CourseSingleCall.nextlesson(
-                                                h5pContentCourseSingleResponse
-                                                    .jsonBody,
-                                              ),
-                                              ParamType.int,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      }
-                                    } else {
-                                      context.pushNamed(
-                                        'CourseDetails',
-                                        queryParameters: {
-                                          'courseId': serializeParam(
-                                            widget.courseid,
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-                                    }
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Please complete this lesson first',
-                                          style: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                        ),
-                                        duration: const Duration(milliseconds: 4000),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .warning,
-                                      ),
-                                    );
-                                  }
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/forward_btn.png',
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                            ].divide(const SizedBox(width: 10.0)),
-                          ),
-                        ),
                       ],
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 0.0, 0.0),
-                      child: FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 0.0,
-                        borderWidth: 0.0,
-                        buttonSize: 40.0,
-                        icon: Icon(
-                          Icons.arrow_back_rounded,
-                          color: FlutterFlowTheme.of(context).alternate,
-                          size: 24.0,
+                    Align(
+                      alignment: const AlignmentDirectional(-1.00, -1.00),
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            20.0, 20.0, 0.0, 0.0),
+                        child: FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 0.0,
+                          borderWidth: 0.0,
+                          buttonSize: 40.0,
+                          icon: Icon(
+                            Icons.arrow_back_rounded,
+                            color: FlutterFlowTheme.of(context).alternate,
+                            size: 24.0,
+                          ),
+                          onPressed: () async {
+                            context.pushNamed(
+                              'CourseDetails',
+                              queryParameters: {
+                                'courseId': serializeParam(
+                                  1073,
+                                  ParamType.int,
+                                ),
+                              }.withoutNulls,
+                            );
+                          },
                         ),
-                        onPressed: () async {
-                          context.pushNamed(
-                            'CourseDetails',
-                            queryParameters: {
-                              'courseId': serializeParam(
-                                1073,
-                                ParamType.int,
-                              ),
-                            }.withoutNulls,
-                          );
-                        },
+                      ),
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(-1.00, 1.00),
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            20.0, 0.0, 0.0, 20.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.safePop();
+                          },
+                          child: Image.asset(
+                            'assets/images/back_btn.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: const AlignmentDirectional(1.00, 1.00),
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 20.0, 20.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            setState(() => _model.apiRequestCompleter = null);
+                            await _model.waitForApiRequestCompleted(
+                                minWait: 500);
+                            if (CourseSingleCall.completed(
+                              h5pContentCourseSingleResponse.jsonBody,
+                            )) {
+                              if (CourseSingleCall.nextlessonavailable(
+                                h5pContentCourseSingleResponse.jsonBody,
+                              )) {
+                                if (CourseSingleCall.nextlessontype(
+                                      h5pContentCourseSingleResponse.jsonBody,
+                                    ).toString() ==
+                                    'video') {
+                                  context.pushNamed(
+                                    'coursesingle',
+                                    queryParameters: {
+                                      'sectionId': serializeParam(
+                                        widget.sectionid! + 1,
+                                        ParamType.int,
+                                      ),
+                                      'courseId': serializeParam(
+                                        widget.courseid,
+                                        ParamType.int,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                } else {
+                                  context.pushNamed(
+                                    'h5pContent',
+                                    queryParameters: {
+                                      'sectionid': serializeParam(
+                                        widget.sectionid,
+                                        ParamType.int,
+                                      ),
+                                      'courseid': serializeParam(
+                                        widget.courseid,
+                                        ParamType.int,
+                                      ),
+                                      'lessonId': serializeParam(
+                                        CourseSingleCall.nextlesson(
+                                          h5pContentCourseSingleResponse
+                                              .jsonBody,
+                                        ),
+                                        ParamType.int,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                }
+                              } else {
+                                context.pushNamed(
+                                  'CourseDetails',
+                                  queryParameters: {
+                                    'courseId': serializeParam(
+                                      widget.courseid,
+                                      ParamType.int,
+                                    ),
+                                  }.withoutNulls,
+                                );
+                              }
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Please complete this lesson first',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).warning,
+                                ),
+                              );
+                            }
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              'assets/images/forward_btn.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],

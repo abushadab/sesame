@@ -301,8 +301,7 @@ class _CoursesingleWidgetState extends State<CoursesingleWidget> {
                                             setState(() => _model
                                                 .apiRequestCompleter = null);
                                             await _model
-                                                .waitForApiRequestCompleted(
-                                                    minWait: 5000);
+                                                .waitForApiRequestCompleted();
                                             if (CourseSingleCall.completed(
                                               columnCourseSingleResponse
                                                   .jsonBody,

@@ -62,14 +62,6 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer>
         }
       });
     }
-
-    // if (_controller.value.position.inSeconds >=
-    //     (_controller.metadata.duration.inSeconds * 0.9).toInt()) {
-    //   FFAppState().update(() {
-    //     FFAppState().videoComplete = true;
-    //   });
-    //   widget.onEnd();
-    // }
   }
 
   @override

@@ -36,13 +36,21 @@ class SignInModel extends FlutterFlowModel<SignInWidget> {
   FocusNode? otpFocusNode;
   TextEditingController? otpController;
   String? Function(BuildContext, String?)? otpControllerValidator;
+  String? _otpControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // Model for GradientButton component.
   late GradientButtonModel gradientButtonModel1;
   // Stores action output result for [Backend Call - API (sendotp)] action in GradientButton widget.
   ApiCallResponse? apiResult1s9;
   // Model for GradientButton component.
   late GradientButtonModel gradientButtonModel2;
-  // Stores action output result for [Backend Call - API (Oneclick Login and Signup)] action in GradientButton widget.
+  // Stores action output result for [Backend Call - API (Login)] action in GradientButton widget.
   ApiCallResponse? verifyOtp;
 
   /// Initialization and disposal methods.
@@ -50,6 +58,7 @@ class SignInModel extends FlutterFlowModel<SignInWidget> {
   @override
   void initState(BuildContext context) {
     phoneNumberControllerValidator = _phoneNumberControllerValidator;
+    otpControllerValidator = _otpControllerValidator;
     gradientButtonModel1 = createModel(context, () => GradientButtonModel());
     gradientButtonModel2 = createModel(context, () => GradientButtonModel());
   }

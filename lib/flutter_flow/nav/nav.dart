@@ -109,71 +109,79 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'parent_profile',
           path: '/parentProfile',
+          requireAuth: true,
           builder: (context, params) => const ParentProfileWidget(),
         ),
         FFRoute(
           name: 'teacher_profile',
           path: '/teacherProfile',
+          requireAuth: true,
           builder: (context, params) => const TeacherProfileWidget(),
         ),
         FFRoute(
           name: 'settings',
           path: '/settings',
+          requireAuth: true,
           builder: (context, params) => const SettingsWidget(),
         ),
         FFRoute(
           name: 'worksheet',
           path: '/worksheet',
+          requireAuth: true,
           builder: (context, params) => const WorksheetWidget(),
         ),
         FFRoute(
           name: 'teacher_profile_link',
           path: '/teacherProfileLink',
+          requireAuth: true,
           builder: (context, params) => const TeacherProfileLinkWidget(),
         ),
         FFRoute(
           name: 'Ham_menu_expanded',
           path: '/hamMenuExpanded',
+          requireAuth: true,
           builder: (context, params) => const HamMenuExpandedWidget(),
         ),
         FFRoute(
           name: 'worksheet_big_and_small_emotions',
           path: '/worksheetBigAndSmallEmotions',
+          requireAuth: true,
           builder: (context, params) => const WorksheetBigAndSmallEmotionsWidget(),
         ),
         FFRoute(
           name: 'world_of_mathematics',
           path: '/worldOfMathematics',
+          requireAuth: true,
           builder: (context, params) => const WorldOfMathematicsWidget(),
         ),
         FFRoute(
           name: 'life_Skills',
           path: '/lifeSkills',
+          requireAuth: true,
           builder: (context, params) => const LifeSkillsWidget(),
         ),
         FFRoute(
           name: 'letter_ocean',
           path: '/letterOcean',
+          requireAuth: true,
           builder: (context, params) => const LetterOceanWidget(),
         ),
         FFRoute(
           name: 'home_player',
           path: '/homePlayer',
+          requireAuth: true,
           builder: (context, params) => const HomePlayerWidget(),
-        ),
-        FFRoute(
-          name: 'Verifyotp',
-          path: '/verifyotp',
-          builder: (context, params) => const VerifyotpWidget(),
         ),
         FFRoute(
           name: 'letter_oceanCopy',
           path: '/letterOceanCopy',
+          requireAuth: true,
           builder: (context, params) => const LetterOceanCopyWidget(),
         ),
         FFRoute(
           name: 'CourseDetails',
           path: '/courseDetails',
+          requireAuth: true,
           builder: (context, params) => CourseDetailsWidget(
             courseId: params.getParam('courseId', ParamType.int),
           ),
@@ -181,16 +189,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'worlds',
           path: '/worlds',
+          requireAuth: true,
           builder: (context, params) => const WorldsWidget(),
         ),
         FFRoute(
           name: 'world1',
           path: '/world1',
+          requireAuth: true,
           builder: (context, params) => const World1Widget(),
         ),
         FFRoute(
           name: 'coursesingle',
           path: '/coursesingle',
+          requireAuth: true,
           builder: (context, params) => CoursesingleWidget(
             sectionId: params.getParam('sectionId', ParamType.int),
             courseId: params.getParam('courseId', ParamType.int),
@@ -199,6 +210,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'h5pContent',
           path: '/h5pContent',
+          requireAuth: true,
           builder: (context, params) => H5pContentWidget(
             sectionid: params.getParam('sectionid', ParamType.int),
             courseid: params.getParam('courseid', ParamType.int),
@@ -209,6 +221,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'VideoPlayerPage',
           path: '/videoPlayerPage',
+          requireAuth: true,
           builder: (context, params) => VideoPlayerPageWidget(
             videoId: params.getParam('videoId', ParamType.String),
             courseId: params.getParam('courseId', ParamType.int),
