@@ -23,7 +23,6 @@ export '/pages/world_of_mathematics/world_of_mathematics_widget.dart'
 export '/pages/life_skills/life_skills_widget.dart' show LifeSkillsWidget;
 export '/pages/letter_ocean/letter_ocean_widget.dart' show LetterOceanWidget;
 export '/pages/home_player/home_player_widget.dart' show HomePlayerWidget;
-export '/pages/verifyotp/verifyotp_widget.dart' show VerifyotpWidget;
 export '/pages/letter_ocean_copy/letter_ocean_copy_widget.dart'
     show LetterOceanCopyWidget;
 export '/pages/course_details/course_details_widget.dart'

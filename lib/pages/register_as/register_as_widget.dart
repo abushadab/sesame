@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -203,73 +204,35 @@ class _RegisterAsWidgetState extends State<RegisterAsWidget> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  child: RichText(
+                    textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                    text: TextSpan(
                       children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 70.0, 0.0, 0.0),
-                          child: Text(
-                            'Already Have An Account?',
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Atma',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                          ),
+                        const TextSpan(
+                          text: 'Already Have An Account? ',
+                          style: TextStyle(),
                         ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Align(
-                          alignment: const AlignmentDirectional(1.00, 0.00),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                2.0, 70.0, 0.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(
-                                  'Sign_in',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: const TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType:
-                                          PageTransitionType.rightToLeft,
-                                      duration: Duration(milliseconds: 500),
-                                    ),
-                                  },
-                                );
-                              },
-                              child: Text(
-                                'Sign up',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Atma',
-                                      color: const Color(0xFFFFC600),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                            ),
+                        TextSpan(
+                          text: 'Sign in',
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context).accent1,
                           ),
-                        ),
+                          mouseCursor: SystemMouseCursors.click,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async {
+                              context.pushNamed('Sign_in');
+                            },
+                        )
                       ],
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Atma',
+                            color: FlutterFlowTheme.of(context).alternate,
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),

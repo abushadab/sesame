@@ -186,6 +186,55 @@ class SendotpCall {
       );
 }
 
+class SendotpForRegisterCall {
+  static Future<ApiCallResponse> call({
+    String? countrycode = '+880',
+    String? mobileNo = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'sendotp for register',
+      apiUrl:
+          'https://hostkoro.com/sarath/wp-json/digits/v1/send_otp?type=register',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'countrycode': countrycode,
+        'mobileNo': mobileNo,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic accountkit(dynamic response) => getJsonField(
+        response,
+        r'''$.accountkit''',
+      );
+  static dynamic firebase(dynamic response) => getJsonField(
+        response,
+        r'''$.firebase''',
+      );
+  static dynamic code(dynamic response) => getJsonField(
+        response,
+        r'''$.code''',
+      );
+  static dynamic datamessage(dynamic response) => getJsonField(
+        response,
+        r'''$.data.message''',
+      );
+  static dynamic success(dynamic response) => getJsonField(
+        response,
+        r'''$.success''',
+      );
+  static dynamic message(dynamic response) => getJsonField(
+        response,
+        r'''$.message''',
+      );
+}
+
 class OneclickLoginAndSignupCall {
   static Future<ApiCallResponse> call({
     String? countrycode = '+880',
@@ -232,14 +281,61 @@ class OneclickLoginAndSignupCall {
       );
 }
 
-class SignupCall {
+class LoginCall {
   static Future<ApiCallResponse> call({
     String? countrycode = '+880',
     String? mobileNo = '',
     String? otp = '',
   }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'Signup',
+      callName: 'Login',
+      apiUrl: 'https://hostkoro.com/sarath/wp-json/digits/v1/login_user',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'countrycode': countrycode,
+        'user': mobileNo,
+        'otp': otp,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic loginsuccess(dynamic response) => getJsonField(
+        response,
+        r'''$.success''',
+      );
+  static dynamic dataaccesstoken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.access_token''',
+      );
+  static dynamic datatokentype(dynamic response) => getJsonField(
+        response,
+        r'''$.data.token_type''',
+      );
+  static dynamic dataztoken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.ztoken''',
+      );
+  static dynamic datamsg(dynamic response) => getJsonField(
+        response,
+        r'''$.data.msg''',
+      );
+}
+
+class SignupForParentCall {
+  static Future<ApiCallResponse> call({
+    String? countrycode = '+880',
+    String? mobileNo = '',
+    String? otp = '',
+    int? digitsRegAge,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Signup for parent',
       apiUrl: 'https://hostkoro.com/sarath/wp-json/digits/v1/create_user',
       callType: ApiCallType.POST,
       headers: {},
@@ -247,6 +343,58 @@ class SignupCall {
         'digits_reg_countrycode': countrycode,
         'digits_reg_mobile': mobileNo,
         'otp': otp,
+        'digits_reg_age': digitsRegAge,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic loginsuccess(dynamic response) => getJsonField(
+        response,
+        r'''$.success''',
+      );
+  static dynamic dataaccesstoken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.access_token''',
+      );
+  static dynamic datatokentype(dynamic response) => getJsonField(
+        response,
+        r'''$.data.token_type''',
+      );
+  static dynamic dataztoken(dynamic response) => getJsonField(
+        response,
+        r'''$.data.ztoken''',
+      );
+  static dynamic datamsg(dynamic response) => getJsonField(
+        response,
+        r'''$.data.msg''',
+      );
+}
+
+class SignupForTeacherCall {
+  static Future<ApiCallResponse> call({
+    String? countrycode = '+880',
+    String? mobileNo = '',
+    String? otp = '',
+    int? digitsRegClass,
+    String? digitsRegDistrict = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Signup for teacher',
+      apiUrl: 'https://hostkoro.com/sarath/wp-json/digits/v1/create_user',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'digits_reg_countrycode': countrycode,
+        'digits_reg_mobile': mobileNo,
+        'otp': otp,
+        'digits_reg_class': digitsRegClass,
+        'digits_reg_district': digitsRegDistrict,
+        'role': "teacher",
       },
       bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
       returnBody: true,

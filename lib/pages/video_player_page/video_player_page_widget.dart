@@ -1,4 +1,3 @@
-import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -87,7 +86,7 @@ class _VideoPlayerPageWidgetState extends State<VideoPlayerPageWidget> {
                         await MsLmsGroup.completeALessonCall.call(
                       courseId: widget.courseId,
                       itemId: widget.itemId,
-                      token: currentAuthenticationToken,
+                      token: FFAppState().ztoken,
                     );
 
                     setState(() {});

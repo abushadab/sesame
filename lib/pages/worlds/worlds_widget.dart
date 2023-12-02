@@ -88,7 +88,7 @@ class _WorldsWidgetState extends State<WorldsWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed('splash_screen');
+                          context.goNamed('Ham_menu_expanded');
                         },
                         child: const Icon(
                           Icons.menu_outlined,
